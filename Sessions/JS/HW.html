@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <style>
+    body {
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      margin: 40px;
+      text-align: left;
+      background-color: rgb(255, 0, 0);
+      
+    }
+    #result {
+      margin-top: 40px;
+      font-size: 30px;
+      color: #fffdfd;
+      font-family: monospace;
+      
+    }
+    #title{
+     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', fantasy;
+     font-size: 3rem;
+    }
+    
+  </style>
+</head>
+<body>
+    <h10 id="title">Press any key on your keyboard</h1>
+  <div id="result">Your key result will appear here</div>
+  
+
+  <script>
+    document.addEventListener('keypress', (e) => {
+      let letter = e.key;
+      const resultDiv = document.getElementById('result');
+
+      // Only allow single character check
+      if (letter.length !== 1) {
+        resultDiv.textContent = "Please press one key at a time.";
+        return;
+      }
+
+      const vowels = ['a', 'e', 'i', 'o', 'u'];
+      const isLetter = /^[a-zA-Z]$/.test(letter);
+      const isNumber = /^[0-9]$/.test(letter);
+
+      if (isLetter) {
+        const lower = letter.toLowerCase();
+        if (vowels.includes(lower)) {
+          console.log("Vowel pressed.");
+          resultDiv.textContent = `You pressed a VOWEL: "${letter}"`;
+        } else {
+          console.log("Consonant pressed.");
+          resultDiv.textContent = `You pressed a CONSONANT: "${letter}"`;
+        }
+      } else if (isNumber) {
+        console.log("Number pressed.");
+        resultDiv.textContent = `You pressed a NUMBER: "${letter}"`;
+      } else {
+        console.log("Symbol or other key pressed.");
+        resultDiv.textContent = `You pressed a SYMBOL or SPECIAL CHARACTER: "${letter}"`;
+      }
+    });
+  </script>
+</body>
+</html>
